@@ -71,14 +71,13 @@ def main():
         username = st.text_input("Enter Twitter username")
         if st.button("Fetch Tweets"):
             tweets_data = scraper.get_tweets(username, mode='user', number=5)
-            if 'tweets' in tweets_data:  # Check if the 'tweets' key exists
+            if 'tweets' in tweets_data: 
                 for tweet in tweets_data['tweets']:
-                    tweet_text = tweet['text']  # Access the text of the tweet
-                    sentiment = predict_sentiment(tweet_text, model, vectorizer, stop_words)  # Predict sentiment of the tweet text
-                    
-                    # Create and display the colored card for the tweet
-                    card_html = create_card(tweet_text, sentiment)
-                    st.markdown(card_html, unsafe_allow_html=True)
+                    tweet_text = tweet['text'] 
+                    sentiment = predict_sentiment(tweet_text, model, vectorizer, stop_words)  # Predicting sentiment of the tweet text
+                    # Creating and displaying the colored card for the tweet
+                    card = create_card(tweet_text, sentiment)
+                    st.markdown(card , unsafe_allow_html=True)
             else:
                 st.write("No tweets found or an error occurred.")
 
